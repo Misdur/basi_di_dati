@@ -1,0 +1,590 @@
+\documentclass[a4paper, 10pt]{report}
+\usepackage[italian]{babel}
+\usepackage{graphics}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{pdfpages}
+\usepackage{eso-pic}
+\usepackage{everyshi}
+\usepackage{longtable}
+
+\begin{document}
+\begin{center}
+\resizebox{11cm}{3cm}{
+\includegraphics{logo}}
+\end{center}
+\bigskip
+\vspace{1cm}
+\begin{center}
+\textsc{Elaborato Basi di Dati\\
+GROUPPONE}
+\end{center}
+\bigskip
+\vspace{6cm}
+\begin {tabular}[t]{l}
+Professore\\
+Corrado Aaron Visaggio
+\end{tabular}
+\hfill
+\begin{tabular}[t]{l}
+                 Autore\\
+Laudiero Aurelio\\
+Matr. 863/350\\
+Manganiello Angelo\\
+Matr. 863/371\\
+Pace Luca\\
+Matr. 863/252\\
+\end{tabular}
+\thispagestyle{empty}
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+\setcounter{page}{1}
+\raggedright
+\chapter{Specifiche dei requisiti}
+
+\section{Frasi di carattere generale}
+Si intende relizzare un sistema web based per la implementazione dei gruppi di acquisto. Un gruppo di acquisto raccoglie un insieme di persone che possono realizzare l'acquisto di un bene in un'unica transazione finanziaria. 
+Vi sono, dunque, due tipologie di utenze: l'acquirente ed il venditore. 
+
+\section{Frase relative venditori}
+Un venditore \`e definito da:
+\begin{itemize}
+\item Ragione sociale
+\item Categoria
+\item Idirizzo di posta elettronica
+\item Idirizzo fisico dell'azienda
+\item Url del sito web aziendale
+\item Recapito telefonico cellulare
+\item Recapito telefonico azienda
+\item Partita IVA
+\item Contratto di rapporto con Grouppone stipulato e controfirmato dalle parti
+\end{itemize}
+Un venditore pu\`o vendere al massimo due tipologie di beni
+\section{Frase relative agli acquirenti}
+Ogni acquirente \`e definito da:
+\begin{itemize}
+\item Nome
+\item Cognome
+\item Indirizzo di posta elettronica
+\item Indirizzo dell'abitazione
+\item Indirizzo di fatturazione
+\item Recapito telefonico, sia cellulare che fisso
+\end{itemize}
+
+\section{Frase relative ai centri di raccolta}
+Sono stabiliti poi dei centri di raccolta, definiti da:
+\begin{itemize}
+\item Indirizzo
+\item Responsabile del centro di raccolta (Nome, cognome, indirizzo, recapito telefonico)
+\end{itemize}
+
+\section{Frase relative al feedback}
+Ogni acquirente, rigorosamente dopo aver effettuato un acquisto, pu\`o esprimere sia un voto numerico da 1 (molto scarso) a 5 (ottimo) sul venditore, che un giudizio testuale che verr\`a pubblicato sulla pagina informativa del venditore. Tali giudizi devono esprimere l'affidabilit\`a del venditore, la qualit\`a della merce e del rapporto e qualunque informazione possa servire a costruire la reputation del venditore. Ogni utente non può esprimere più di un giudizio testuale o un voto circa un venditore a seguito di una transazione.
+
+\section{Frase relative alle transazioni}
+Una transazione deve mantenere traccia di:
+\begin{itemize}
+\item Venditore
+\item Offerta (quantit\`a del bene offerta, prezzo complessivo, scadenza dell'offerta)
+\item Bene
+\item Quantit\`a del bene
+\item Prezzo unitario
+\item Unità di misura del bene (le unit\`a di misura possono essere quelle del sistema metrico decimale o il pezzo)
+\item Gruppo di acquisto, definito dalla lista di acquirenti. Per ciascun acquirente bisogna indicare la quantit\`a di bene desiderato (verificare che la quantit\`a totale di bene nella domanda coincida perfettamente con quello dell'offerta)
+\item Centro di raccolta in cui verr\`a consegnato il bene
+\item Data in cui verr\`a consegnato la quantit\`a di bene acquistata
+\item Giorno in cui \`e stata creato il gruppo di acquisto
+\end{itemize}
+
+\section{Frase relative ai beni venduti}
+Il bene venduto deve afferire alle categorie di vendita del corrispondente venditore.
+
+\section{Frase relative ai log}
+Ogni tre mesi le informazioni sulle transazioni effettuate devono essere trasferito su una tavola di log. Le informazioni della tavola di log dopo sei mesi verranno trasferite su un log testuale.
+
+\section{Frase relative ai messaggi privati}
+Gli acquirenti possono inviarsi messaggi di posta privati. Ogni messaggio di posta deve essere contraddistinto dalle seguenti informazioni
+\begin{itemize}
+\item Destinatari
+\item Oggetto
+\item Testo
+\item Corpo del messaggio
+\end{itemize}
+
+\chapter{Glossario dei termini}
+\begin{longtable}[!h]{|l|p{4cm}|l|p{4cm}|}
+\hline
+\textbf{TERMINE}&\textbf{DESCRIZIONE}&\textbf{SINONIMI}&\textbf{COLLEGAMENTI}\\
+\hline
+Acquirente & \`E l'utente che effettua l'acquisto &  &Messaggio, Gruppo di acquisto, nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_abitazione, tel\_cellulare \\
+\hline
+Venditore & \`E l'utente che effettua la vendita &  &Gruppo di acquisto, Centro raccolta, partita\_IVA, ragione\_sociale, e\_mail, categoria, url\_azienda, ind\_azienda, tel\_azienda, contratto, tel\_cell\_aziendale\\
+\hline
+Messaggio & Testo che gli acquirenti utilizzano per comunicare & MP & Acquirente,destinatario, oggetto, testo, corpo\_messaggio \\
+\hline
+Gruppo di acquisto & Insieme di acquirenti che effettuano l'acquisto & GA & Acquirente, Venditore\\
+\hline
+Centro di raccolta & Luogo dove viene spedita la merce ad un gruppo di acquisto & CR &  indirizzo, responsabile \\
+\hline
+Transazione & Operazione commerciale di compravendita tra le parti interessate & & Venditore, Gruppo di acquisto\\
+\hline
+Giudizio & Opinione espressa sul bene acquistato dal singolo acquirente & & Acquirente, Venditore, voto, testo \\
+\hline
+Responsabile & \`E l'acquirente responsabile del centro raccolta, a cui il venditore fa riferimento & &Centro raccolta, nome, cognome, indirizzo, rec\_tel \\
+\hline
+Offerta & Insieme dei beni venduti dal Venditore & & quant\_bene\_offerta, prezzo\_complessivo, scad\_offerta \\
+\hline
+Ragione sociale &\`E il nome commerciale delle societ\`a di persone ed equivale al nome civile di almeno una persona fisica & ragione\_sociale & Venditore\\
+\hline
+Url del sito web aziendale & \`E il riferimento al link del sito web dell'azienda &url\_azienda & Venditore \\
+\hline
+Contratto &\`E il contratto stipulato con Grouppone e controfirmato dalle parti & contratto & Venditore \\
+\hline
+Partita IVA &\`E una sequenza di cifre che identifica univocamente un soggetto che esercita un'attivit\`a rilevante ai fini dell'imposizione fiscale indiretta & partita\_IVA & Venditore \\
+\hline
+Unit\`a di misura del bene & Indica le caratteristiche fisiche del bene offerto, espresse nel sistema metrico decimale & unit\`a\_mis\_bene & \\
+\hline
+Indirizzo fatturazione & Indirizzo al quale verr\`a inviata la fattura & ind\_fatturazione & Acquirente \\
+\hline
+Categoria & Indica la tipologia a cui appartiene il bene offerto dal venditore & & Venditore \\
+\hline
+\end{longtable}
+\chapter{Dizionario dei dati}
+\section{Tabella delle entit\`a}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|p{3cm}|p{5cm}|p{3.5cm}|}
+\hline
+\textbf{ENTIT\`A}&\textbf{DESCRIZIONE}&\textbf{ATTRIBUTI}&\textbf{IDENTIFICATORE}\\
+\hline
+Acquirente &\`E l'utente che effettua l'acquisto & nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_abitazione, tel\_cellulare, tel\_abitazione & \underline{tel\_abitazione}\\
+\hline
+Venditore & \`E l'utente che effettua la vendita & partita\_IVA, ragione\_sociale, categoria, e\_mail, ind\_azienda, url\_azienda, tel\_azienda, contratto, tel\_cell\_aziendale& \underline{partita\_IVA}\\
+\hline
+Gruppo di acquisto & Insieme di acquirenti che effettuano l'acquisto & id & \underline{id}\\
+\hline
+Centro di raccolta & Luogo dove viene spedita la merce ad un gruppo di acquisto & indirizzo, responsabile & \underline{responsabile}\\
+\hline
+Messaggio & Testo che gli acquirenti utilizzano per comunicare & oggetto, destinatario, testo, corpo\_mess & \underline{destinatario}\\
+\hline
+Bene & Qualsiasi oggetto avente il requisito dell'utilit\`a, della materialit\`a, della limitatezza e dell'accessibilit\`a & id\_bene & \underline{id\_bene} \\
+\hline
+\end{tabular}
+\end{table}
+\section{Tabella delle relazioni}
+\newpage
+\begin{longtable}{|l|p{4cm}|l|}
+\hline
+\textbf{RELAZIONE}&\textbf{DESCRIZIONE}&\textbf{ENTIT\`A COINVOLTE}\\
+\hline
+Transazione & Operazione commerciale di compravendita tra le parti interessate & Gruppo di acquisto (1,N), Venditore (1,N)  \\
+\hline
+Partecipa & Associa un acquirente ad un gruppo di acquisto & Acquirente (1,N), Gruppo di acquisto (1,N) \\
+\hline
+Ritira & Tiene traccia degli acquirenti che hanno ritirato un bene dal centro raccolta & Acquirente (1,N), Centro raccolta (1,N) \\
+\hline
+Spedisce & Tiene traccia dei venditori che hanno spedito dei beni ad un centro raccolta & Venditore (1,N), Centro raccolta (1,N) \\
+\hline
+Giudizio & Tiene traccia del giudizio espresso dall'acquirente sul bene acquistato tramite un voto numerico o un giudizio testuale & Acquirente (0,2), Venditore (0,N) \\
+\hline
+Riceve & Associa un acquirente ad un messaggio in qualit\`a di destinatario & Messaggio (1,N), Acquirente (0,N) \\
+\hline
+Invia & Associa un acquirente ad un messaggio in qualit\`a di mittente & Messaggio (1,1), Acquirente (1,N) \\
+\hline
+Categoria & Associa una tipologia di bene ad un venditore & Bene (1,1), Venditore (0,2) \\
+\hline
+\end{longtable}
+
+\chapter{Progettazione concettuale}
+
+\chapter{Progettazione logica}
+\section{Traduzione verso il modello relazionale}
+\begin{centering}
+\textbf{Acquirente} (\underline{tel\_abitazione}, nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_cellulare)\\
+\textbf{Venditore} (\underline{partita\_IVA}, ragione\_sociale, e\_mail, ind\_azienda, url\_azienda, tel\_azienda, contratto, tel\_cell\_aziendale)\\
+\textbf{Bene} (\underline{id\_bene})\\
+\textbf{Messaggio} (\underline{destinatario}, oggetto, corpo\_mess, testo)\\
+\textbf{Gruppo di acquisto} (\underline{id})\\
+\textbf{Centro raccolta} (\underline{responsabile}, indirizzo)\\
+\textbf{Transazione} (\underline{partita\_IVA}, \underline{id}, prez\_unitario, unit\`a\_mis\_bene, gruppo\_acquisto, centro\_raccolta, data\_consegna, data\_creaz\_grup\_acquisto, bene, venditore, quant\_bene)\\
+\textbf{Partecipa} (\underline{tel\_abitazione}, \underline{id})\\
+\textbf{Categoria} (\underline{id\_bene}, \underline{partita\_IVA})\\
+\textbf{Invia} (\underline{tel\_abitazione},\underline{destinatario})\\
+\textbf{Riceve} (\underline{tel\_abitazione},\underline{destinatario})\\
+\textbf{Spedisce} (\underline{responsabile},\underline{partita\_IVA})\\
+\textbf{Ritira} (\underline{tel\_abitazione}, \underline{responsabile})\\
+\textbf{Giudizio} (\underline{tel\_abitazione}, \underline{responsabile})\\
+\end{centering}
+\bigskip
+
+In questa traduzione verso il modello relazionale si definiscono i vincoli d'integrit\`a referenziale, noti come forein key:\\
+
+\bigskip
+\textbf{Acquirente} (\underline{tel\_abitazione}, nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_cellulare)\\
+\textbf{Venditore} (\underline{partita\_IVA}, ragione\_sociale, e\_mail, ind\_azienda, url\_azienda, tel\_azienda, contratto, tel\_cell\_aziendale)\\
+\textbf{Bene} (\underline{id\_bene})\\
+\textbf{Messaggio} (\underline{destinatario}, oggetto, corpo\_mess, testo)\\
+\textbf{Gruppo di acquisto} (\underline{id})\\
+\textbf{Centro raccolta} (\underline{responsabile}, indirizzo)\\
+\textbf{Transazione} (\underline{partita\_IVA}, \underline{id}, prez\_unitario, unit\`a\_mis\_bene, gruppo\_acquisto, centro\_raccolta, data\_consegna, data\_creaz\_grup\_acquisto, bene, venditore, quant\_bene)\\
+\textbf{Partecipa} (\underline{tel\_abitazione}, \underline{id})\\
+\textbf{Categoria} (\underline{id\_bene}, \underline{partita\_IVA})\\
+\textbf{Invia} (\underline{tel\_abitazione},\underline{destinatario})\\
+\textbf{Riceve} (\underline{tel\_abitazione},\underline{destinatario})\\
+\textbf{Spedisce} (\underline{responsabile},\underline{partita\_IVA})\\
+\textbf{Ritira} (\underline{tel\_abitazione}, \underline{responsabile})\\
+\textbf{Giudizio} (\underline{tel\_abitazione}, \underline{responsabile})\\
+
+\chapter{Analisi delle prestazioni}
+L'analisi delle prestazioni serve ad individuare le zone dello schema E-R. Una volta individuate esse vanno ristrutturate così da garantire alla base di dati un'ottima gestione della memoria e un costo relativamente basso per le operazioni.
+A tale scopo vengono realizzate tre tavole:
+\begin{itemize}
+\item Tavola dei volumi
+\item Tavola delle operazioni
+\item Tavola degli accessi
+\end {itemize}
+Le prestazioni dello schema E-R saranno valutate direttamente sulle query assegnate:
+\begin{enumerate}
+\item Tutti gli acquirenti che hanno effettuato transazioni di beni appartenenti alla stessa categoria e che hanno espresso valutazioni negative sul venditore (voto $<$ 3)
+\item Tutti i venditori che hanno ricevuto valutazioni negative dagli stessi acquirenti
+\item Tutti i venditori che hanno ricevuto valutazioni positive dagli acquirenti che vivono nella stessa citt\`a
+\item Tutti le coppie di acquirenti che hanno comperato un bene dallo stesso venditore e che si sono scambiati almeno un messaggio di posta privata
+\item Tutti gli acquirenti che hanno comperato un bene dallo stesso venditore e che hanno pubblicato un messaggio sulla sua pagina personale
+\item Tutti gli acquirenti che nell’ultimo anno hanno acquistato beni da un solo venditore
+\end{enumerate}
+\newpage
+\section{Tavole dei volumi}
+\begin{longtable}[!h]{|l|l|l|}
+\hline
+\textbf{CONCETTO}&\textbf{TIPO}&\textbf{VOLUME}\\
+\hline
+Acquirente & Entit\`a & 20.000 \\
+\hline
+Venditore & Entit\`a & 10.000 \\
+\hline
+Centro raccolta & Entit\`a & 3.000 \\
+\hline
+Gruppo di acquisto & Entit\`a & 3.000 \\
+\hline
+Meassaggio & Entit\`a & 10.000 \\
+\hline
+Transazione & Relazione & 100.000 \\
+\hline
+Spedisce a & Relazione & 100.000 \\
+\hline
+Ritira & Relazione & 40.000 \\
+\hline
+Partecipa & Relazione & 20.000 \\
+\hline
+Riceve & Relazione & 17.000 \\
+\hline
+Invia & Relazione & 12.000 \\
+\hline
+Giudizio & Relazione & 70.000 \\
+\hline
+\end{longtable}
+\section{Tavole delle operazioni}
+In questa tavola sono riportate, per ogni operazione, la frequenza giornaliera prevista.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{OPERAZIONE}&\textbf{TIPO}&\textbf{FREQUENZA}\\
+\hline
+1 & interattiva &  \\
+\hline
+2 & interattiva &  \\
+\hline
+3 & interattiva &  \\
+\hline
+4 & interattiva &  \\
+\hline
+5 & interattiva &  \\
+\hline
+6 & interattiva & \\
+\hline
+7 & & \\
+\hline
+8 & & \\
+\hline
+9 & & \\
+\hline
+10 & & \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Tavole degli accessi}
+La tavola degli accessi riporta il numero di occorrenze necessarie per eseguire una data interrogazione. Essa fornisce una stima del costo di un'operazione. Tale stima \`e ottenuta contando il numero degli accessi alle relazioni e alle entit\`a necessarie epr soddisfare la specifica interrogazione.
+\begin{enumerate}
+\item Operazione: Tutti gli acquirenti che hanno effettuato transazioni di beni appartenenti alla stessa categoria e che hanno espresso valutazioni negative sul venditore (voto $<$ 3)\\
+Si supponga che 25 venditori abbiano una categoria di bene in comune e che 200 gli acquirenti che hannoo effettuato transazioni verso questi abbiano espresso un giudizio minore di 3.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+Acquirente & E & 200 & L\\
+\hline
+Venditore & E & 25 & L\\
+\hline
+Bene & E & 1 & L\\
+\hline
+Giudizio & R & 25 & L\\
+\hline
+Categoria & R & 1 & L\\
+\hline
+\end{tabular}
+\end{table}
+
+\item Operazione: Tutti i venditori che hanno ricevuto valutazioni negative dagli stessi acquirenti\\
+Supponiamo di avere 20 venditori che hanno ricevuto un giudizio negativo da parte di 10 acquirenti.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+Venditore & E & 20 & L\\
+\hline
+Acquirente & E & 10 & L\\
+\hline
+Giudizio & R & 20 & L\\
+\hline
+\end{tabular}
+\end{table}
+
+\item Operazione: Tutti i venditori che hanno ricevuto valutazioni positive dagli acquirenti che vivono nella stessa citt\`a\\
+Supponiamo di avere 40 venditori che hanno ricevuto un giudizio positivo da parte di 25 acquirenti che risiedono nella medesima citt\`a.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+Venditore & E & 40 & L\\
+\hline
+Acquirente & E & 25 & L\\
+\hline
+Giudizio & R & 1 & L\\
+\hline
+\end{tabular}
+\end{table}
+
+\item Operazione: Tutte le coppie di acquirenti che hanno comperato un bene dallo stesso venditore e che si sono scambiati almeno un messaggio di posta privata\\
+Supponiamo che vi siano 40 coppie di acquirenti che hanno acquistato dei beni dagli stessi 60 venditori e che si siano scambiati, almeno, un messaggio tra loro.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+Venditore & E & 60 & L\\ 
+\hline
+Acquirente & E & 40 & L\\
+\hline
+Gruppo di acquisto & E & 10 & L\\
+\hline
+Messaggio & E & 40 & L\\
+\hline
+Transazione & R & 40 & L\\
+\hline
+Partecipa & R & 10 & L\\
+\hline
+Invia & R & 50 & L\\
+\hline
+Riceve & R & 50 & L\\
+\hline
+\end{tabular}
+\end{table}
+
+\item Operazione: Tutti gli acquirenti che hanno comperato un bene dallo stesso venditore e che hanno pubblicato un messaggio sulla sua pagina personale\\
+Si supponga che 25 venditori abbiano una categoria di bene in comune e che 200 gli acquirenti che hannoo effettuato transazioni verso questi abbiano espresso un giudizio testuale.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+Acquirente & E & 200 & L\\
+\hline
+Venditore & E & 25 & L\\
+\hline
+Bene & E & 1 & L\\
+\hline
+Giudizio & R & 25 & L\\
+\hline
+Categoria & R & 1 & L\\
+\hline
+\end{tabular}
+\end{table}
+
+\item Operazione: Tutti gli acquirenti che nell'ultimo anno hanno acquistato beni da un solo venditore\\
+Supponiamo che 40 acquirenti acquistino da un venditore nell'ultimo anno.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+Venditore & E & 1 & L\\ 
+\hline
+Acquirente & E & 40 & L\\
+\hline
+Gruppo di acquisto & E & 10 & L\\
+\hline
+Transazione & R & 40 & L\\
+\hline
+Partecipa & R & 10 & L\\
+\hline
+\end{tabular}
+\end{table}
+\newpage 
+\item Operazione: \\
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+\end{tabular}
+\end{table}
+
+\item Operazione: \\
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+\end{tabular}
+\end{table}
+
+\item Operazione: \\
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+\end{tabular}
+\end{table}
+
+\item Operazione: \\
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+\end{tabular}
+\end{table}
+\end{enumerate}
+
+\chapter{Descrizioni delle operazioni di normalizzazione effettuate}
+
+\chapter{Identificazione delle regole di business}
+\begin{enumerate}
+\item Un utente deve essere necessariamente registrato
+\item Non possono esistere due utenti con la medesima e\_mail
+\item Un utente registrato, per poter acquistare, deve partecipare ad un gruppo di acquisto
+\item L'acquisto di un bene deve essere effettuato in un'unica transazione finanziaria
+\item Gli utenti possono appartenere solo a due tipologie: Acquirente o Venditore
+\item Per poter esprimere un giudizio, l'acquirente deve prima effettuare un'acquisto
+\item Il giudizio numerico deve essere compreso tra 1 e 5
+\item L'acquirente non pu\`o esprimere pi\`u di un voto circa un venditore a seguito di una transazione
+\item Il bene venduto deve afferire alle categorie di vendita del corrispondente venditore
+\item Un venditore pu\`o avere al massimo due tipologie di beni
+\item Ogni tre mesi le informazioni sulle transazioni effettuate devono essere trasferite su una tavola di log
+\item Le informazioni della tavola di log, dopo sei mesi, devono essere trasferite su un log testuale
+\item Solo gli acquirenti possono inviarsi messaggi di posta privati
+\item Il messaggio deve avere almeno un destinatario
+\item Ogni messaggio di posta deve necessariamente avere un testo
+\item Ogni messaggio di posta deve necessariamente avere un oggetto
+\end{enumerate}
+\chapter{Discussione delle ottimizzazioni}
+
+\chapter{Script per la creazione del database}
+\begin{enumerate}
+\item SQL \\
+\textbf{Introduzione al linguaggio:}\\
+\textbf{Script:}\\
+
+\item Python\\
+\textbf{Introduzione al linguaggio:}\\
+\textbf{Script:}\\
+
+\item JDBC\\
+\textbf{Introduzione al linguaggio:}\\
+\textbf{Script:}\\
+\end{enumerate}
+
+\chapter{Implementazione delle regole di vincolo}
+\begin{enumerate}
+\item Un utente deve essere necessariamente registrato
+\item Non possono esistere due utenti con la medesima e\_mail
+\item Un utente registrato, per poter acquistare, deve partecipare ad un gruppo di acquisto
+\item L'acquisto di un bene deve essere effettuato in un'unica transazione finanziaria
+\item Gli utenti possono appartenere solo a due tipologie: Acquirente o Venditore
+\item Per poter esprimere un giudizio, l'acquirente deve prima effettuare un'acquisto
+\item Il giudizio numerico deve essere compreso tra 1 e 5
+\item L'acquirente non pu\`o esprimere pi\`u di un voto circa un venditore a seguito di una transazione
+\item Il bene venduto deve afferire alle categorie di vendita del corrispondente venditore
+\item Un venditore pu\`o avere al massimo due tipologie di beni
+\item Ogni tre mesi le informazioni sulle transazioni effettuate devono essere trasferite su una tavola di log
+\item Le informazioni della tavola di log, dopo sei mesi, devono essere trasferite su un log testuale
+\item Solo gli acquirenti possono inviarsi messaggi di posta privati
+\item Il messaggio deve avere almeno un destinatario
+\item Ogni messaggio di posta deve necessariamente avere un testo
+\item Ogni messaggio di posta deve necessariamente avere un oggetto
+\end{enumerate}
+
+\chapter{Interrogazione del database}
+\begin{enumerate}
+\item Operazione: Tutti gli acquirenti che hanno effettuato transazioni di beni appartenenti alla stessa categoria e che hanno espresso valutazioni negative sul venditore (voto $<$ 3)\\
+\textbf{SQL:}\\
+\textbf{JDBC:}\\
+\textbf{Python:}\\
+\textbf{Algebra relazionale:}\\
+
+\item Operazione: Tutti i venditori che hanno ricevuto valutazioni negative dagli stessi acquirenti\\
+
+\textbf{SQL:}\\
+\textbf{JDBC:}\\
+\textbf{Python:}\\
+\textbf{Algebra relazionale:}\\
+
+\item Operazione: Tutti i venditori che hanno ricevuto valutazioni positive dagli acquirenti che vivono nella stessa citt\`a \\
+
+\textbf{SQL:}\\
+\textbf{JDBC:}\\
+\textbf{Python:}\\
+\textbf{Algebra relazionale:}\\
+
+\item Operazione: Tutte le coppie di acquirenti che hanno comperato un bene dallo stesso venditore e che si sono scambiati almeno un messaggio di posta privata\\
+
+\textbf{SQL:}\\
+\textbf{JDBC:}\\
+\textbf{Python:}\\
+\textbf{Algebra relazionale:}\\
+
+\item Operazione: Tutti gli acquirenti che hanno comperato un bene dallo stesso venditore e che hanno pubblicato un messaggio sulla sua pagina personale\\
+
+\textbf{SQL:}\\
+\textbf{JDBC:}\\
+\textbf{Python:}\\
+\textbf{Algebra relazionale:}\\
+
+\item Operazione: Tutti gli acquirenti che nell'ultimo anno hanno acquistato beni da un solo venditore\\
+
+\textbf{SQL:}\\
+\textbf{JDBC:}\\
+\textbf{Python:}\\
+\textbf{Algebra relazionale:}\\
+
+\end{enumerate}
+
+\end{document}
