@@ -7,6 +7,7 @@
 \usepackage{eso-pic}
 \usepackage{everyshi}
 \usepackage{longtable}
+\usepackage{multirow}
 
 \begin{document}
 \begin{center}
@@ -114,7 +115,7 @@ Gli acquirenti possono inviarsi messaggi di posta privati. Ogni messaggio di pos
 \end{itemize}
 
 \chapter{Glossario dei termini}
-\begin{longtable}[!h]{|l|p{4cm}|l|p{4cm}|}
+\begin{longtable}[!h]{|p{2cm}|p{3.5cm}|c|p{4cm}|}
 \hline
 \textbf{TERMINE}&\textbf{DESCRIZIONE}&\textbf{SINONIMI}&\textbf{COLLEGAMENTI}\\
 \hline
@@ -153,28 +154,48 @@ Categoria & Indica la tipologia a cui appartiene il bene offerto dal venditore &
 \end{longtable}
 \chapter{Dizionario dei dati}
 \section{Tabella delle entit\`a}
-\begin{table}[h!]
-\centering
-\begin{tabular}{|l|p{3cm}|p{5cm}|p{3.5cm}|}
+\begin{longtable}[!h]{|l|p{3cm}|p{3cm}|p{4cm}|}
+
 \hline
 \textbf{ENTIT\`A}&\textbf{DESCRIZIONE}&\textbf{ATTRIBUTI}&\textbf{IDENTIFICATORE}\\
 \hline
-Acquirente &\`E l'utente che effettua l'acquisto & nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_abitazione, tel\_cellulare, tel\_abitazione & \underline{tel\_abitazione}\\
-\hline
-Venditore & \`E l'utente che effettua la vendita & partita\_IVA, ragione\_sociale, categoria, e\_mail, ind\_azienda, url\_azienda, tel\_azienda, contratto, tel\_cell\_aziendale& \underline{partita\_IVA}\\
+ \multirow{7}{*}{Acquirente} & & nome & \\
+                             & & cognome & \\
+                             & E l'utente che & e\_mail & \\
+                             & effettua l'acquisto & ind\_abitazione & \underline{tel\_abitazione}\\
+                             & & ind\_fatturazione & \\
+                             & & tel\_abitazione & \\
+                             & & tel\_abitazione & \\
+\hline                                                                      
+\multirow{9}{*}{Venditore} 
+                           & &partita\_IVA &\\
+                           & &ragione\_sociale &\\ 
+                           & &categoria &\\
+                           &\`E l'utente che & e\_mail & \underline{partita\_IVA}\\
+                           &effettua la vendita &ind\_azienda &\\
+                           & &url\_azienda &\\
+                           & &tel\_azienda &\\
+                           & &contratto &\\
+                           & &tel\_cell\_aziendale &\\
 \hline
 Gruppo di acquisto & Insieme di acquirenti che effettuano l'acquisto & id & \underline{id}\\
 \hline
-Centro di raccolta & Luogo dove viene spedita la merce ad un gruppo di acquisto & indirizzo, responsabile & \underline{responsabile}\\
+\multirow{4}{*}{Centro di raccolta} & Luogo dove viene & &\\
+                                    & spedita la merce ad  & indirizzo &\underline{responsabile}\\
+                                    & un gruppo di & responsabile &\\
+                                    & acquisto & &\\
 \hline
-Messaggio & Testo che gli acquirenti utilizzano per comunicare & oggetto, destinatario, testo, corpo\_mess & \underline{destinatario}\\
+\multirow{4}{*}{Messaggio} 
+                           &Testo che gli & oggetto &\\
+                           & acquirenti & testo &\underline{destinatario}\\
+                           & utilizzano & destinatario & \\ 
+                           & per comunicare & corpo\_mess & \\
 \hline
 Bene & Qualsiasi oggetto avente il requisito dell'utilit\`a, della materialit\`a, della limitatezza e dell'accessibilit\`a & id\_bene & \underline{id\_bene} \\
 \hline
-\end{tabular}
-\end{table}
+\end{longtable}
+
 \section{Tabella delle relazioni}
-\newpage
 \begin{longtable}{|l|p{4cm}|l|}
 \hline
 \textbf{RELAZIONE}&\textbf{DESCRIZIONE}&\textbf{ENTIT\`A COINVOLTE}\\
