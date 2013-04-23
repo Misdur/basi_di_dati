@@ -2,10 +2,7 @@
 \usepackage[italian]{babel}
 \usepackage{graphics}
 \usepackage{enumerate}
-\usepackage{color}
-\usepackage{pdfpages}
-\usepackage{eso-pic}
-\usepackage{everyshi}
+\usepackage{xcolor}
 \usepackage{longtable}
 \usepackage{multirow}
 
@@ -37,12 +34,10 @@ Pace Luca\\
 Matr. 863/252\\
 \end{tabular}
 \thispagestyle{empty}
-\newpage
 \tableofcontents
 \thispagestyle{empty}
-\newpage
-\setcounter{page}{1}
-\raggedright
+\setcounter{page}{0}
+
 \chapter{Specifiche dei requisiti}
 
 \section{Frasi di carattere generale}
@@ -221,6 +216,30 @@ Categoria & Associa una tipologia di bene ad un venditore & Bene (1,1), Venditor
 \chapter{Progettazione concettuale}
 
 \chapter{Progettazione logica}
+
+\section{Scelta degli identificatori primari}
+Una chiave per definizione non pu\`o mai assumere valori nulli e inoltre nella relazione in cui si trova deve individuare in modo univoco una tupla. Gli identificatori primari scelti per ogni entit\`a sono:\\
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ENTIT\`A}& \textbf{IDENTIFICATORE}\\
+\hline
+Acquirente & \underline{tel\_abitazione}\\
+\hline
+Venditore & \underline{partita\_IVA}\\
+\hline
+Gruppo di acquisto & \underline{id}\\
+\hline
+Centro di raccolta & \underline{responsabile}\\
+\hline
+Messaggio & \underline{destinatario}\\
+\hline
+Bene & \underline{id\_bene} \\
+\hline
+\end{tabular}
+\end{table}
+
 \section{Traduzione verso il modello relazionale}
 \begin{centering}
 \textbf{Acquirente} (\underline{tel\_abitazione}, nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_cellulare)\\
@@ -238,25 +257,24 @@ Categoria & Associa una tipologia di bene ad un venditore & Bene (1,1), Venditor
 \textbf{Ritira} (\underline{tel\_abitazione}, \underline{responsabile})\\
 \textbf{Giudizio} (\underline{tel\_abitazione}, \underline{responsabile})\\
 \end{centering}
-\bigskip
 
 In questa traduzione verso il modello relazionale si definiscono i vincoli d'integrit\`a referenziale, noti come forein key:\\
 
-\bigskip
-\textbf{Acquirente} (\underline{tel\_abitazione}, nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_cellulare)\\
-\textbf{Venditore} (\underline{partita\_IVA}, ragione\_sociale, e\_mail, ind\_azienda, url\_azienda, tel\_azienda, contratto, tel\_cell\_aziendale)\\
-\textbf{Bene} (\underline{id\_bene})\\
-\textbf{Messaggio} (\underline{destinatario}, oggetto, corpo\_mess, testo)\\
-\textbf{Gruppo di acquisto} (\underline{id})\\
-\textbf{Centro raccolta} (\underline{responsabile}, indirizzo)\\
-\textbf{Transazione} (\underline{partita\_IVA}, \underline{id}, prez\_unitario, unit\`a\_mis\_bene, gruppo\_acquisto, centro\_raccolta, data\_consegna, data\_creaz\_grup\_acquisto, bene, venditore, quant\_bene)\\
-\textbf{Partecipa} (\underline{tel\_abitazione}, \underline{id})\\
-\textbf{Categoria} (\underline{id\_bene}, \underline{partita\_IVA})\\
-\textbf{Invia} (\underline{tel\_abitazione},\underline{destinatario})\\
-\textbf{Riceve} (\underline{tel\_abitazione},\underline{destinatario})\\
-\textbf{Spedisce} (\underline{responsabile},\underline{partita\_IVA})\\
-\textbf{Ritira} (\underline{tel\_abitazione}, \underline{responsabile})\\
-\textbf{Giudizio} (\underline{tel\_abitazione}, \underline{responsabile})\\
+\raggedright
+\textbf{Acquirente} (\underline{\textcolor{red}{tel\_abitazione}}, nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_cellulare)\\
+\textbf{Venditore} (\underline{\textcolor{orange}{partita\_IVA}}, ragione\_sociale, e\_mail, ind\_azienda, url\_azienda, tel\_azienda, contratto, tel\_cell\_aziendale)\\
+\textbf{Bene} (\underline{\textcolor{gray}{id\_bene}})\\
+\textbf{Messaggio} (\underline{\textcolor{blue}{destinatario}}, oggetto, corpo\_mess, testo)\\
+\textbf{Gruppo di acquisto} (\underline{\textcolor{magenta}{id}})\\
+\textbf{Centro raccolta} (\underline{\textcolor{green}{responsabile}}, indirizzo)\\
+\textbf{Transazione} (\underline{\textcolor{orange}{partita\_IVA}}, \underline{\textcolor{magenta}{id}}, prez\_unitario, unit\`a\_mis\_bene, gruppo\_acquisto, centro\_raccolta, data\_consegna, data\_creaz\_grup\_acquisto, bene, venditore, quant\_bene)\\
+\textbf{Partecipa} (\underline{\textcolor{red}{tel\_abitazione}}, \underline{\textcolor{magenta}{id}})\\
+\textbf{Categoria} (\underline{\textcolor{gray}{id\_bene}}, \underline{\textcolor{orange}{partita\_IVA}})\\
+\textbf{Invia} (\underline{\textcolor{red}{tel\_abitazione}},\underline{\textcolor{blue}{destinatario}})\\
+\textbf{Riceve} (\underline{\textcolor{red}{tel\_abitazione}},\underline{\textcolor{blue}{destinatario}})\\
+\textbf{Spedisce} (\underline{\textcolor{green}{responsabile}},\underline{\textcolor{orange}{partita\_IVA}})\\
+\textbf{Ritira} (\underline{\textcolor{red}{tel\_abitazione}}, \underline{\textcolor{green}{responsabile}})\\
+\textbf{Giudizio} (\underline{\textcolor{red}{tel\_abitazione}}, \underline{\textcolor{green}{responsabile}})\\
 
 \chapter{Analisi delle prestazioni}
 L'analisi delle prestazioni serve ad individuare le zone dello schema E-R. Una volta individuate esse vanno ristrutturate così da garantire alla base di dati un'ottima gestione della memoria e un costo relativamente basso per le operazioni.
