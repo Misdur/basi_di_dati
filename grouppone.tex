@@ -2,10 +2,7 @@
 \usepackage[italian]{babel}
 \usepackage{graphics}
 \usepackage{enumerate}
-\usepackage{color}
-\usepackage{pdfpages}
-\usepackage{eso-pic}
-\usepackage{everyshi}
+\usepackage{xcolor}
 \usepackage{longtable}
 \usepackage{multirow}
 
@@ -37,12 +34,10 @@ Pace Luca\\
 Matr. 863/252\\
 \end{tabular}
 \thispagestyle{empty}
-\newpage
 \tableofcontents
 \thispagestyle{empty}
-\newpage
-\setcounter{page}{1}
-\raggedright
+\setcounter{page}{0}
+
 \chapter{Specifiche dei requisiti}
 
 \section{Frasi di carattere generale}
@@ -221,6 +216,30 @@ Categoria & Associa una tipologia di bene ad un venditore & Bene (1,1), Venditor
 \chapter{Progettazione concettuale}
 
 \chapter{Progettazione logica}
+
+\section{Scelta degli identificatori primari}
+Una chiave per definizione non pu\`o mai assumere valori nulli e inoltre nella relazione in cui si trova deve individuare in modo univoco una tupla. Gli identificatori primari scelti per ogni entit\`a sono:\\
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ENTIT\`A}& \textbf{IDENTIFICATORE}\\
+\hline
+Acquirente & \underline{tel\_abitazione}\\
+\hline
+Venditore & \underline{partita\_IVA}\\
+\hline
+Gruppo di acquisto & \underline{id}\\
+\hline
+Centro di raccolta & \underline{responsabile}\\
+\hline
+Messaggio & \underline{destinatario}\\
+\hline
+Bene & \underline{id\_bene} \\
+\hline
+\end{tabular}
+\end{table}
+
 \section{Traduzione verso il modello relazionale}
 \begin{centering}
 \textbf{Acquirente} (\underline{tel\_abitazione}, nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_cellulare)\\
@@ -238,25 +257,24 @@ Categoria & Associa una tipologia di bene ad un venditore & Bene (1,1), Venditor
 \textbf{Ritira} (\underline{tel\_abitazione}, \underline{responsabile})\\
 \textbf{Giudizio} (\underline{tel\_abitazione}, \underline{responsabile})\\
 \end{centering}
-\bigskip
 
 In questa traduzione verso il modello relazionale si definiscono i vincoli d'integrit\`a referenziale, noti come forein key:\\
 
-\bigskip
-\textbf{Acquirente} (\underline{tel\_abitazione}, nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_cellulare)\\
-\textbf{Venditore} (\underline{partita\_IVA}, ragione\_sociale, e\_mail, ind\_azienda, url\_azienda, tel\_azienda, contratto, tel\_cell\_aziendale)\\
-\textbf{Bene} (\underline{id\_bene})\\
-\textbf{Messaggio} (\underline{destinatario}, oggetto, corpo\_mess, testo)\\
-\textbf{Gruppo di acquisto} (\underline{id})\\
-\textbf{Centro raccolta} (\underline{responsabile}, indirizzo)\\
-\textbf{Transazione} (\underline{partita\_IVA}, \underline{id}, prez\_unitario, unit\`a\_mis\_bene, gruppo\_acquisto, centro\_raccolta, data\_consegna, data\_creaz\_grup\_acquisto, bene, venditore, quant\_bene)\\
-\textbf{Partecipa} (\underline{tel\_abitazione}, \underline{id})\\
-\textbf{Categoria} (\underline{id\_bene}, \underline{partita\_IVA})\\
-\textbf{Invia} (\underline{tel\_abitazione},\underline{destinatario})\\
-\textbf{Riceve} (\underline{tel\_abitazione},\underline{destinatario})\\
-\textbf{Spedisce} (\underline{responsabile},\underline{partita\_IVA})\\
-\textbf{Ritira} (\underline{tel\_abitazione}, \underline{responsabile})\\
-\textbf{Giudizio} (\underline{tel\_abitazione}, \underline{responsabile})\\
+\raggedright
+\textbf{Acquirente} (\underline{\textcolor{red}{tel\_abitazione}}, nome, cognome, e\_mail, ind\_abitazione, ind\_fatturazione, tel\_cellulare)\\
+\textbf{Venditore} (\underline{\textcolor{orange}{partita\_IVA}}, ragione\_sociale, e\_mail, ind\_azienda, url\_azienda, tel\_azienda, contratto, tel\_cell\_aziendale)\\
+\textbf{Bene} (\underline{\textcolor{gray}{id\_bene}})\\
+\textbf{Messaggio} (\underline{\textcolor{blue}{destinatario}}, oggetto, corpo\_mess, testo)\\
+\textbf{Gruppo di acquisto} (\underline{\textcolor{magenta}{id}})\\
+\textbf{Centro raccolta} (\underline{\textcolor{green}{responsabile}}, indirizzo)\\
+\textbf{Transazione} (\underline{\textcolor{orange}{partita\_IVA}}, \underline{\textcolor{magenta}{id}}, prez\_unitario, unit\`a\_mis\_bene, gruppo\_acquisto, centro\_raccolta, data\_consegna, data\_creaz\_grup\_acquisto, bene, venditore, quant\_bene)\\
+\textbf{Partecipa} (\underline{\textcolor{red}{tel\_abitazione}}, \underline{\textcolor{magenta}{id}})\\
+\textbf{Categoria} (\underline{\textcolor{gray}{id\_bene}}, \underline{\textcolor{orange}{partita\_IVA}})\\
+\textbf{Invia} (\underline{\textcolor{red}{tel\_abitazione}},\underline{\textcolor{blue}{destinatario}})\\
+\textbf{Riceve} (\underline{\textcolor{red}{tel\_abitazione}},\underline{\textcolor{blue}{destinatario}})\\
+\textbf{Spedisce} (\underline{\textcolor{green}{responsabile}},\underline{\textcolor{orange}{partita\_IVA}})\\
+\textbf{Ritira} (\underline{\textcolor{red}{tel\_abitazione}}, \underline{\textcolor{green}{responsabile}})\\
+\textbf{Giudizio} (\underline{\textcolor{red}{tel\_abitazione}}, \underline{\textcolor{green}{responsabile}})\\
 
 \chapter{Analisi delle prestazioni}
 L'analisi delle prestazioni serve ad individuare le zone dello schema E-R. Una volta individuate esse vanno ristrutturate così da garantire alla base di dati un'ottima gestione della memoria e un costo relativamente basso per le operazioni.
@@ -340,8 +358,8 @@ In questa tavola sono riportate, per ogni operazione, la frequenza giornaliera p
 \section{Tavole degli accessi}
 La tavola degli accessi riporta il numero di occorrenze necessarie per eseguire una data interrogazione. Essa fornisce una stima del costo di un'operazione. Tale stima \`e ottenuta contando il numero degli accessi alle relazioni e alle entit\`a necessarie epr soddisfare la specifica interrogazione.
 \begin{enumerate}
-\item Operazione: Tutti gli acquirenti che hanno effettuato transazioni di beni appartenenti alla stessa categoria e che hanno espresso valutazioni negative sul venditore (voto $<$ 3)\\
-Si supponga che 25 venditori abbiano una categoria di bene in comune e che 200 gli acquirenti che hannoo effettuato transazioni verso questi abbiano espresso un giudizio minore di 3.
+\item Operazione: Tutti gli acquirenti che hanno effettuato transazioni di beni appartenenti alla stessa categoria e che hanno espresso valutazioni negative sul venditore (voto $<$ 3).\\
+Si supponga che 25 venditori abbiano una categoria di bene in comune e che 200 gli acquirenti che hanno effettuato transazioni verso questi abbiano espresso un giudizio minore di 3.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|c|c|c|}
@@ -361,7 +379,7 @@ Categoria & R & 1 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutti i venditori che hanno ricevuto valutazioni negative dagli stessi acquirenti\\
+\item Operazione: Tutti i venditori che hanno ricevuto valutazioni negative dagli stessi acquirenti.\\
 Supponiamo di avere 20 venditori che hanno ricevuto un giudizio negativo da parte di 10 acquirenti.
 \begin{table}[h!]
 \centering
@@ -378,7 +396,7 @@ Giudizio & R & 20 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutti i venditori che hanno ricevuto valutazioni positive dagli acquirenti che vivono nella stessa citt\`a\\
+\item Operazione: Tutti i venditori che hanno ricevuto valutazioni positive dagli acquirenti che vivono nella stessa citt\`a.\\
 Supponiamo di avere 40 venditori che hanno ricevuto un giudizio positivo da parte di 25 acquirenti che risiedono nella medesima citt\`a.
 \begin{table}[h!]
 \centering
@@ -395,7 +413,7 @@ Giudizio & R & 1 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutte le coppie di acquirenti che hanno comperato un bene dallo stesso venditore e che si sono scambiati almeno un messaggio di posta privata\\
+\item Operazione: Tutte le coppie di acquirenti che hanno comperato un bene dallo stesso venditore e che si sono scambiati almeno un messaggio di posta privata.\\
 Supponiamo che vi siano 40 coppie di acquirenti che hanno acquistato dei beni dagli stessi 60 venditori e che si siano scambiati, almeno, un messaggio tra loro.
 \begin{table}[h!]
 \centering
@@ -422,7 +440,7 @@ Riceve & R & 50 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutti gli acquirenti che hanno comperato un bene dallo stesso venditore e che hanno pubblicato un messaggio sulla sua pagina personale\\
+\item Operazione: Tutti gli acquirenti che hanno comperato un bene dallo stesso venditore e che hanno pubblicato un messaggio sulla sua pagina personale.\\
 Si supponga che 25 venditori abbiano una categoria di bene in comune e che 200 gli acquirenti che hannoo effettuato transazioni verso questi abbiano espresso un giudizio testuale.
 \begin{table}[h!]
 \centering
@@ -443,7 +461,7 @@ Categoria & R & 1 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutti gli acquirenti che nell'ultimo anno hanno acquistato beni da un solo venditore\\
+\item Operazione: Tutti gli acquirenti che nell'ultimo anno hanno acquistato beni da un solo venditore.\\
 Supponiamo che 40 acquirenti acquistino da un venditore nell'ultimo anno.
 \begin{table}[h!]
 \centering
@@ -464,49 +482,105 @@ Partecipa & R & 10 & L\\
 \end{tabular}
 \end{table}
 \newpage 
-\item Operazione: \\
+\item Operazione: Tutti i venditori che hanno spedito ad uno stesso centro 
+      raccolta nell'ultimo anno.\\
+      Supponiamo che 40 venditori abbiano spedito allo stesso centro raccolta
+      nell'ultimo anno.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
 \textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
 \hline
+Venditore & E & 40 & L\\
+\hline
+Centro Raccolta & E & 1 & L\\
+\hline
+Spedisce & R & 40 & L\\
+\hline
 \end{tabular}
 \end{table}
 
-\item Operazione: \\
+\item Operazione: Centri raccolta che hanno rivevuto ricevuto p\`u beni da venditori
+      con giudizi $>$ 3.\\
+      Supponiamo di avere 30 centri raccolta e 40 venditori con giudizi positivi($>3$).
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
 \hline
+Venditore & E & 40 & L\\
+\hline
+Centro Raccolta & E & 30 & L\\
+\hline 
+Spedisce & R & 200 & L\\
+\hline
+Giudizio & R & 400 & L\\
+\hline
 \end{tabular}
 \end{table}
 
-\item Operazione: \\
+\item Operazione: Elenco di acquirenti, venditori e centri raccolta
+      presenti nella stessa citt\`a.\\
+      Supponiamo di avere 50 acquirenti, 15 venditori e 5 centri raccolta
+      nella stessa citt\`a.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
 \hline
+Acquirente & E & 50 & L\\
+\hline
+Venditore & E & 15 & L\\
+\hline
+Centro Raccolta & E & 5 & L\\
+\hline
 \end{tabular}
 \end{table}
 
-\item Operazione: \\
+\item Operazione: Utenti che si sono scambiati messaggi e appartengono
+      allo stesso di acquisto.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+
 \hline
 \end{tabular}
 \end{table}
 \end{enumerate}
 
 \chapter{Descrizioni delle operazioni di normalizzazione effettuate}
+La normalizzazione \`e, per definizione, un meticoloso procedimento dedito all'eliminazione delle ridondanze e del rischio di incoerenza del database. Esistono 11 livelli di normalizzazione (dette forme normali), ma tutti hanno lo scopo di certificare la qualit\`a dello schema del database. Questo processo poggia le sue basi su un semplice criterio: se una relazione presenta più concetti tra loro indipendenti, allora la si pu\`o decomporre in relazioni pi\'u piccole, una per ogni concetto. Questo tipo di processo, purtroppo, non \`e applicabile in tutte le tabelle, perch\`e si potrebbe incorrere in una perdita di informazione. D'altro canto, in uno schema non nomralizzato, sono facilemnte riscontrabili i seguenti problemi:
+\subsubsection{Ridondanza}
+\`E possibile che alcuni dati debbano essere ripetuti in pi\`u tuple senza che essi aggiungano alcuna informazione significativa.
+\subsubsection{Anomalie di aggiornamento}
+In presenza di ridondanza, un aggiornamento su un certo dato, deve essere ripetuto per tutte le occorrenze che coinvolgono quel dato.
+\subsubsection{Anomalie di cancellazione}
+La cancellazione di una tupla non pi\`u valida potrebbe comportare uno spiacevole effetto domino anche sui concetti che conservano ancora la loro validit\`a.
+\subsubsection{Anomalie di inserimento}
+\`E consentito solo l'inserimento di concetti che sono in grado di costituire una tupla completa o che almeno abbiano la chiave primaria.\\
+Per valutare se lo schema \`e detto nella forma ``normale'', dobbiamo individuare le dipendenze funzionali cos\`i definite.
+\newtheorem{mydef}{Definizione}
+\begin{mydef}
+Data una relazione r su uno schema R(x) e due sottoinsiemi di attributi non vuoti Y e Z di x, diremo che esiste su r una dipendenza funzionale tra Y e Z se, per ogni coppia di tuple $t_1$ e $t_2$ di r aventi gli stessi valori sugli attributi Y, risulta che $t_1$ e $t_2$ hanno gli stessi valori anche sugli attributi Z.
+\end{mydef}
 
+Come accennato prima, per normalizzare uno schema si ricorre alle forme normali, ovvero a delle propriet\`a che se rispettate dalla base di dati, ne garantiscono la sua efficienza e qualit\`a. Le forme normali a disposizione sono:
+\begin{itemize}
+\item Forma Normale di Boyce-Codd
+\item Prima Forma Normale
+\item Seconda Forma Normale
+\item Terza Forma Normale
+\end{itemize}
+La migliore di tutte, dal punto di vista della sicurezza, nell'evitare anomalie \`e la Forma Normale di Boyce-Codd. Essa afferma:
+\begin{mydef}
+Una relazione r \`e in Forma Normale di Boyce-Codd se, per ogni dipendenza funzionale non banale $X \rightarrow Y$ definito su di essa, X contiene una chiave K di r. 
+\end{mydef}
 \chapter{Identificazione delle regole di business}
 \begin{enumerate}
 \item Un utente deve essere necessariamente registrato
