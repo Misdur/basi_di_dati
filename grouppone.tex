@@ -358,8 +358,8 @@ In questa tavola sono riportate, per ogni operazione, la frequenza giornaliera p
 \section{Tavole degli accessi}
 La tavola degli accessi riporta il numero di occorrenze necessarie per eseguire una data interrogazione. Essa fornisce una stima del costo di un'operazione. Tale stima \`e ottenuta contando il numero degli accessi alle relazioni e alle entit\`a necessarie epr soddisfare la specifica interrogazione.
 \begin{enumerate}
-\item Operazione: Tutti gli acquirenti che hanno effettuato transazioni di beni appartenenti alla stessa categoria e che hanno espresso valutazioni negative sul venditore (voto $<$ 3)\\
-Si supponga che 25 venditori abbiano una categoria di bene in comune e che 200 gli acquirenti che hannoo effettuato transazioni verso questi abbiano espresso un giudizio minore di 3.
+\item Operazione: Tutti gli acquirenti che hanno effettuato transazioni di beni appartenenti alla stessa categoria e che hanno espresso valutazioni negative sul venditore (voto $<$ 3).\\
+Si supponga che 25 venditori abbiano una categoria di bene in comune e che 200 gli acquirenti che hanno effettuato transazioni verso questi abbiano espresso un giudizio minore di 3.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|c|c|c|}
@@ -379,7 +379,7 @@ Categoria & R & 1 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutti i venditori che hanno ricevuto valutazioni negative dagli stessi acquirenti\\
+\item Operazione: Tutti i venditori che hanno ricevuto valutazioni negative dagli stessi acquirenti.\\
 Supponiamo di avere 20 venditori che hanno ricevuto un giudizio negativo da parte di 10 acquirenti.
 \begin{table}[h!]
 \centering
@@ -396,7 +396,7 @@ Giudizio & R & 20 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutti i venditori che hanno ricevuto valutazioni positive dagli acquirenti che vivono nella stessa citt\`a\\
+\item Operazione: Tutti i venditori che hanno ricevuto valutazioni positive dagli acquirenti che vivono nella stessa citt\`a.\\
 Supponiamo di avere 40 venditori che hanno ricevuto un giudizio positivo da parte di 25 acquirenti che risiedono nella medesima citt\`a.
 \begin{table}[h!]
 \centering
@@ -413,7 +413,7 @@ Giudizio & R & 1 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutte le coppie di acquirenti che hanno comperato un bene dallo stesso venditore e che si sono scambiati almeno un messaggio di posta privata\\
+\item Operazione: Tutte le coppie di acquirenti che hanno comperato un bene dallo stesso venditore e che si sono scambiati almeno un messaggio di posta privata.\\
 Supponiamo che vi siano 40 coppie di acquirenti che hanno acquistato dei beni dagli stessi 60 venditori e che si siano scambiati, almeno, un messaggio tra loro.
 \begin{table}[h!]
 \centering
@@ -440,7 +440,7 @@ Riceve & R & 50 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutti gli acquirenti che hanno comperato un bene dallo stesso venditore e che hanno pubblicato un messaggio sulla sua pagina personale\\
+\item Operazione: Tutti gli acquirenti che hanno comperato un bene dallo stesso venditore e che hanno pubblicato un messaggio sulla sua pagina personale.\\
 Si supponga che 25 venditori abbiano una categoria di bene in comune e che 200 gli acquirenti che hannoo effettuato transazioni verso questi abbiano espresso un giudizio testuale.
 \begin{table}[h!]
 \centering
@@ -461,7 +461,7 @@ Categoria & R & 1 & L\\
 \end{tabular}
 \end{table}
 
-\item Operazione: Tutti gli acquirenti che nell'ultimo anno hanno acquistato beni da un solo venditore\\
+\item Operazione: Tutti gli acquirenti che nell'ultimo anno hanno acquistato beni da un solo venditore.\\
 Supponiamo che 40 acquirenti acquistino da un venditore nell'ultimo anno.
 \begin{table}[h!]
 \centering
@@ -482,42 +482,73 @@ Partecipa & R & 10 & L\\
 \end{tabular}
 \end{table}
 \newpage 
-\item Operazione: \\
+\item Operazione: Tutti i venditori che hanno spedito ad uno stesso centro 
+      raccolta nell'ultimo anno.\\
+      Supponiamo che 40 venditori abbiano spedito allo stesso centro raccolta
+      nell'ultimo anno.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
 \textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
 \hline
+Venditore & E & 40 & L\\
+\hline
+Centro Raccolta & E & 1 & L\\
+\hline
+Spedisce & R & 40 & L\\
+\hline
 \end{tabular}
 \end{table}
 
-\item Operazione: \\
+\item Operazione: Centri raccolta che hanno rivevuto ricevuto p\`u beni da venditori
+      con giudizi $>$ 3.\\
+      Supponiamo di avere 30 centri raccolta e 40 venditori con giudizi positivi($>3$).
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
 \hline
+Venditore & E & 40 & L\\
+\hline
+Centro Raccolta & E & 30 & L\\
+\hline 
+Spedisce & R & 200 & L\\
+\hline
+Giudizio & R & 400 & L\\
+\hline
 \end{tabular}
 \end{table}
 
-\item Operazione: \\
+\item Operazione: Elenco di acquirenti, venditori e centri raccolta
+      presenti nella stessa citt\`a.\\
+      Supponiamo di avere 50 acquirenti, 15 venditori e 5 centri raccolta
+      nella stessa citt\`a.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
 \hline
+Acquirente & E & 50 & L\\
+\hline
+Venditore & E & 15 & L\\
+\hline
+Centro Raccolta & E & 5 & L\\
+\hline
 \end{tabular}
 \end{table}
 
-\item Operazione: \\
+\item Operazione: Utenti che si sono scambiati messaggi e appartengono
+      allo stesso di acquisto.
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{CONCETTO}&\textbf{COSTRUTTO}&\textbf{ACCESSI}&\textbf{TIPO}\\
+\hline
+
 \hline
 \end{tabular}
 \end{table}
